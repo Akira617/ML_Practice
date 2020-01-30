@@ -51,10 +51,10 @@ while changed == True :
         # dist_a = mann_distance(x,cent_a)
         # dist_b = mann_distance(x,cent_b)
         # dist_c = mann_distance(x,cent_c)
-        if x[0] < 2.5 and x[1] < 0.5:
-            continue
-        if x[0] < 2.1 and x[1] < 1.1:
-            continue
+        # if x[0] < 2.5 and x[1] < 0.5:
+        #     continue
+        # if x[0] < 2.1 and x[1] < 1.1:
+        #     continue
         dist_a = euclid_distance(x,cent_a)
         dist_b = euclid_distance(x,cent_b)
         dist_c = euclid_distance(x,cent_c)
