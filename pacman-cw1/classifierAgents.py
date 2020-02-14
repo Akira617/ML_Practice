@@ -110,6 +110,7 @@ class ClassifierAgent(Agent):
         #
         # *********************************************
         self.random_forest = self.train_random_forest()
+        self.evaluation_RF()
         
     # Tidy up when Pacman dies
     def final(self, state):
@@ -284,6 +285,8 @@ class ClassifierAgent(Agent):
         # The recommend number of attributes for each weak Decision Tree is k=log2(d) 
         num_of_attribute_weak = int(round(np.log(total_attributes)/np.log(2)))
         #num_of_attribute_weak = 25
+
+        # Number of tree in random forest
         num_of_tree = 128
         for i in range(num_of_tree):
             sample_data, sample_target = self.bootstrapping()
@@ -303,6 +306,23 @@ class ClassifierAgent(Agent):
         values, freq = np.unique(results, return_counts=True)
         best = values[np.argmax(freq)]
         return best
+    
+    # Perform the evaluation on random forest
+    # As the size of dataset is limited, it's a good idea to use all the data as we don't have overfitting in RF
+    def evaluation_RF(self):
+        test_dataset = self.data
+        test_target = self.target
+        size_of_data = len(test_dataset)
+        hit = 0
+        for index in range(size_of_data):
+            current_data = test_dataset[index]
+            current_target = test_target[index]
+            current_result = self.inference_RF(current_data)
+            if current_result == current_target:
+                hit += 1
+        accuracy = float(hit)/float(size_of_data)
+        print("The Accuracy is "+str(accuracy))
+
 
     # Here we just run the classifier to decide what to do
     def getAction(self, state):
@@ -324,9 +344,6 @@ class ClassifierAgent(Agent):
         best_number = self.inference_RF(features)
         best_action = self.convertNumberToMove(best_number)
         
-        # Sometime the best action is not legal!
-
-        # for index in len(values):
 
 
         # getAction has to return a move. Here we pass "STOP" to the
