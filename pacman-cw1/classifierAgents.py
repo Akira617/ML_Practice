@@ -36,7 +36,6 @@ import sys
 import os
 import csv
 import numpy as np
-# from sklearn import tree
 
 # ClassifierAgent
 #
