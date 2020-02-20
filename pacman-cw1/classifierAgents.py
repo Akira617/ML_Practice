@@ -26,6 +26,8 @@
 # The agents here are extensions written by Simon Parsons, based on the code in
 # pacmanAgents.py
 
+# Classifier implemented by Yilei Liang
+
 from pacman import Directions
 from game import Agent
 import api
