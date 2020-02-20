@@ -247,6 +247,8 @@ class ClassifierAgent(Agent):
             
             def inference(self, input_data):
                 # print(self.best_attribute)
+                # If the left/right node is NOT a inference result, then do inference on the Node
+                # Else return the inference result
                 value = input_data[self.best_attribute]
                 results = [0,1,2,3]
                 if value == 1:
@@ -295,6 +297,7 @@ class ClassifierAgent(Agent):
         return tree_list
 
     # Inference by the random forest
+    # Plurality Voting
     # Input: feature of current state
     # Return: Best Action number of current state
     def inference_RF(self,state_array):
